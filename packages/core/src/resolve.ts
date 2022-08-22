@@ -146,7 +146,7 @@ function tryParseCustomBlock(
 ): any {
   try {
     return JSON.parse(content)
-  } catch (err) {
+  } catch (err: any) {
     const joinedPath = filePath.join('/')
     const wrapped: FileError = new Error(
       `Invalid json format of <${blockName}> content in ${joinedPath}\n` +

@@ -1,0 +1,17 @@
+{
+  "name": "@auto-route/webpack",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "typings": "",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@auto-route/core": "workspace:*",
+    "chokidar": "^3.5.3",
+    "fast-glob": "^3.2.4"
+  }
+}

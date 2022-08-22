@@ -1,5 +1,5 @@
 import * as path from 'path'
-import { generateRoutes } from '../src/index'
+import { generateRoutes } from '../src'
 
 it('Integration test', () => {
   const res = generateRoutes({
