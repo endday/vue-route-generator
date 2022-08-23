@@ -5,3 +5,8 @@ export interface GenerateConfig {
 	chunkNamePrefix?: string
 	nested?: boolean
 }
+
+export interface PluginConfig extends GenerateConfig{
+	useModule?: boolean
+	output?: string
+}

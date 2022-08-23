@@ -13,5 +13,8 @@
     "@auto-route/core": "workspace:*",
     "chokidar": "^3.5.3",
     "fast-glob": "^3.2.4"
+  },
+  "devDependencies": {
+    "webpack": "^5.74.0"
   }
 }

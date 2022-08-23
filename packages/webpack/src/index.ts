@@ -1,20 +1,26 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import chokidar from 'chokidar'
+import * as chokidar from 'chokidar'
+import { Compiler } from 'webpack'
 import { generateRoutes } from '@auto-route/core'
-import { GenerateConfig } from '../../../src/types'
+import { PluginConfig } from '../../../src/types'
 
 const pluginName = 'AutoRoutingPlugin'
 
 class AutoRoutingPlugin {
-	constructor(options: GenerateConfig) {
+	options: PluginConfig
+	watched: boolean
+	hasRun: boolean
+	modules: string[]
+	folderSegments: string[]
+	constructor(options: PluginConfig) {
 		this.options = options
 		this.watched = false
-		this.runFirsted = false
+		this.hasRun = false
 		this.modules = []
 		// 监听目录的层级 ./src/views
 		this.folderSegments = this.options.pages.split('/').filter(folder => /[A-z]/.test(folder))
-		if (this.options.module) {
+		if (this.options.useModule) {
 			// 模块的话
 			// this.parseFolders(this.options.pages)
 			this.createModuleDir()
@@ -30,16 +36,15 @@ class AutoRoutingPlugin {
 	}
 
 	// 监听每个module
-	watchFolder(module) {
+	watchFolder(module: string) {
 		// 还没有监听的话就去监听
 		if (!this.modules.includes(module)) {
-			chokidar.watch(`${this.options.pages}/${module}`).on('all', (event, _path) => {
+			chokidar.watch(`${this.options.pages}/${module}`).on('all', () => {
 				this.generate({
 					...this.options,
 					pages: `${this.options.pages}/${module}`,
-					outFile: path.resolve(__dirname, '../module', `${module}.js`),
-					importPrefix: `${this.options.importPrefix}/${module}/`,
-					module
+					output: path.resolve(__dirname, '../module', `${module}.js`),
+					importPrefix: `${this.options.importPrefix}/${module}/`
 				})
 			})
 			this.modules.push(module)
@@ -61,15 +66,15 @@ class AutoRoutingPlugin {
 	}
 
 	// 构造路由代码并输出到对应模块的js文件中去
-	generate(options) {
+	generate(options: PluginConfig) {
 		const code = generateRoutes(options)
-		const to = options.outFile || path.resolve(__dirname, '../index.js')
+		const to = options.output || path.resolve(__dirname, '../index.js')
 		const existInModuleIndex = fs.existsSync(to)
 		console.log(existInModuleIndex, 'existInModuleIndex...')
 		if (fs.existsSync(to) && fs.readFileSync(to, 'utf8').trim() === code.trim()) {
 			return
 		}
-		fs.writeFile(to, code, (err, _data) => {
+		fs.writeFile(to, code, () => {
 			if (!existInModuleIndex || !fs.existsSync(path.resolve(__dirname, '../module/index.js'))) {
 				console.log(to, 'changeIndex...')
 				// 第一次有模块文件 导出写进去index
@@ -79,7 +84,7 @@ class AutoRoutingPlugin {
 	};
 
 	// 删除文件的时候 把产生的路由文件也删了
-	removeRouteFile(module) {
+	removeRouteFile(module: string) {
 		try {
 			fs.unlinkSync(path.resolve(__dirname, '../module', `${module}.js`))
 			console.log('removeRouteFile...')
@@ -90,27 +95,28 @@ class AutoRoutingPlugin {
 		}
 	}
 
-	apply(compiler) {
-		compiler.hooks.thisCompilation.tap(pluginName, (compilation) => {
-			this.runFirsted = true
+	apply(compiler: Compiler) {
+		compiler.hooks.thisCompilation.tap(pluginName, () => {
+			this.hasRun = true
 			if (!this.watched) {
 				chokidar.watch(this.options.pages, {
 					depth: 0,
 					ignored: /index$/
-				}).on('addDir', (path, stats) => {
-					let curFolderSegments = path.replace(/\\/g, '/').split('/')
-					let curModule = curFolderSegments.pop()
+				}).on('addDir', (path) => {
+					const curFolderSegments = path.replace(/\\/g, '/').split('/')
+					const curModule = curFolderSegments.pop() || ''
 					// ./src/views 不监听views这一层 而是监听子目录
 					if (curFolderSegments.length === this.folderSegments.length) {
 						this.watchFolder(curModule)
 					}
+
 				})
 				chokidar.watch(this.options.pages, {
 					depth: 0,
 					ignored: /index$/
-				}).on('unlinkDir', (path, stats) => {
-					let curFolderSegments = path.replace(/\\/g, '/').split('/')
-					let curModule = curFolderSegments.pop()
+				}).on('unlinkDir', (path) => {
+					const curFolderSegments = path.replace(/\\/g, '/').split('/')
+					const curModule = curFolderSegments.pop()|| ''
 					console.log('remove...')
 					this.removeRouteFile(curModule)
 				})
