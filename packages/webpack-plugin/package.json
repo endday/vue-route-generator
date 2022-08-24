@@ -1,5 +1,5 @@
 {
-  "name": "@auto-route/webpack",
+  "name": "@auto-route/webpack-plugin",
   "version": "1.0.0",
   "main": "src/index.ts",
   "typings": "",
@@ -7,7 +7,7 @@
     "lib"
   ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc --build --verbose"
   },
   "dependencies": {
     "@auto-route/core": "workspace:*",

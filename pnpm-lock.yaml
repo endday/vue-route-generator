@@ -29,7 +29,7 @@ importers:
       vue: 3.2.37
       vue-template-compiler: 2.7.9
 
-  packages/webpack:
+  packages/webpack-plugin:
     specifiers:
       '@auto-route/core': workspace:*
       chokidar: ^3.5.3

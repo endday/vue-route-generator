@@ -1,13 +1,13 @@
 {
   "name": "@auto-route/core",
   "version": "1.0.0",
-  "main": "./lib/index.js",
-  "typings": "./lib/index.d.ts",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "files": [
     "lib"
   ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc --verbose"
   },
   "devDependencies": {
     "@vue/compiler-sfc": "^3.0.5",

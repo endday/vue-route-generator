@@ -3,17 +3,23 @@ import * as path from 'path'
 import * as fg from 'fast-glob'
 import { createRoutes } from './template/routes'
 import { resolveRoutePaths } from './resolve'
-import { GenerateConfig } from '../../../src/types'
 
-export function generateRoutes(
-	{
-		pages,
-		importPrefix = '@/pages/',
-		dynamicImport = true,
-		chunkNamePrefix = '',
-		nested = false
-	}: GenerateConfig): string {
-	const patterns = ['**/*.vue', '!**/__*__.vue', '!**/__*__/**']
+export interface GenerateConfig {
+  pages: string
+  importPrefix?: string
+  dynamicImport?: boolean
+  chunkNamePrefix?: string
+  nested?: boolean
+}
+
+export function generateRoutes({
+  pages,
+  importPrefix = '@/pages/',
+  dynamicImport = true,
+  chunkNamePrefix = '',
+  nested = false,
+}: GenerateConfig): string {
+  const patterns = ['**/*.vue', '!**/__*__.vue', '!**/__*__/**']
 
 	const pagePaths = fg.sync(patterns, {
 		cwd: pages,

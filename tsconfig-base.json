@@ -1,0 +1,17 @@
+{
+//  "compileOnSave": false,
+  "compilerOptions": {
+//    "outDir": "dist",
+    "baseUrl": "./packages",
+    "target": "es2015",
+    "module": "commonjs",
+//    "moduleResolution": "node",
+    "strict": true,
+//    "noUnusedLocals": true,
+//    "noUnusedParameters": true,
+//    "skipLibCheck": true,
+//    "declarationMap": true,
+//    "declaration": true, // 工程引用必须
+    "composite": true, // 工程可以被引用和增量编译
+  }
+}
