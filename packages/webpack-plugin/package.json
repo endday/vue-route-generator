@@ -7,14 +7,15 @@
     "lib"
   ],
   "scripts": {
-    "build": "tsc --build --verbose"
+    "build": "tsc --build"
   },
   "dependencies": {
     "@auto-route/core": "workspace:*",
-    "chokidar": "^3.5.3",
-    "fast-glob": "^3.2.4"
+    "chokidar": "^3.5.3"
   },
   "devDependencies": {
+    "@types/fs-extra": "^9.0.6",
+    "fs-extra": "^10.1.0",
     "webpack": "^5.74.0"
   }
 }

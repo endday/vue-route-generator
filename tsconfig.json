@@ -1,7 +1,14 @@
 {
   "extends": "./tsconfig-base.json",
   "references": [
-    { "path": "./packages/core" },
-    { "path": "./packages/webpack" }
+    {
+      "path": "./packages/core"
+    },
+    {
+      "path": "./packages/webpack"
+    }
+  ],
+  "include": [
+    "src"
   ]
 }

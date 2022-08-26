@@ -1,21 +1,22 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as chokidar from 'chokidar'
-import { Compiler } from 'webpack'
+import type { FSWatcher } from 'chokidar'
+import type { Compiler } from 'webpack'
 import { generateRoutes, GenerateConfig } from '@auto-route/core'
 
 const pluginName = 'AutoRoutingPlugin'
 
-export interface PluginConfig extends GenerateConfig{
+export interface PluginConfig extends GenerateConfig {
 	outFile?: string
 }
 
-class AutoRoutingPlugin {
+export class Plugin {
 	options: PluginConfig
 	hasRun: boolean
 	modules: string[]
 	folderSegments: string[]
-	private watcher: chokidar.FSWatcher
+	private watcher: FSWatcher
 
 	constructor(options: PluginConfig) {
 		this.options = options
@@ -58,5 +59,3 @@ class AutoRoutingPlugin {
 		})
 	}
 }
-
-module.exports = AutoRoutingPlugin
