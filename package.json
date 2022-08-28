@@ -20,6 +20,7 @@
   ],
   "scripts": {
     "build": "pnpm -r --filter=@auto-route/webpack-plugin run build",
+    "build1": "pnpm -r --filter=@auto-route/core run build",
     "test:unit": "jest"
   },
   "devDependencies": {
