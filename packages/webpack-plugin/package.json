@@ -1,7 +1,7 @@
 {
   "name": "@auto-route/webpack-plugin",
   "version": "1.0.0",
-  "main": "src/index.ts",
+  "main": "lib/index.js",
   "typings": "",
   "files": [
     "lib"
