@@ -41,7 +41,7 @@ function pathMapToMeta(
   importPrefix: string,
   nested: boolean,
   readFile: (path: string) => string,
-  parentDepth: number = 0
+  parentDepth = 0
 ): PageMeta[] {
   if (map.value) {
     const path = map.value

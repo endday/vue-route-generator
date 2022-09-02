@@ -31,7 +31,7 @@ const matchOutputWithSnapshot = (path?: string) => {
 	expect(out).toMatchSnapshot()
 }
 
-const addPage = (p: string, content: string = '') => {
+const addPage = (p: string, content = '') => {
 	const to = resolve(path.join('fixtures/pages', p))
 	fse.outputFileSync(to, content)
 }
