@@ -8,6 +8,7 @@ import { generateRoutes, GenerateConfig } from '@auto-route/core'
 const pluginName = 'AutoRoutingPlugin'
 
 export interface PluginConfig extends GenerateConfig {
+	pages: string,
 	outFile?: string
 }
 

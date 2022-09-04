@@ -6,11 +6,14 @@
   },
   "references": [
     {
-      "path": "../core/tsconfig.json"
+      "path": "../core/tsconfig.build.json"
     }
   ],
   "include": [
-    "./src",
-    "./__tests__"
+    "src"
+  ],
+  "exclude": [
+    "__tests__",
+    "jest.config.ts"
   ]
 }

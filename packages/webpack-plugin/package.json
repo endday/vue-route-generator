@@ -2,12 +2,12 @@
   "name": "@auto-route/webpack-plugin",
   "version": "1.0.0",
   "main": "lib/index.js",
-  "typings": "",
+  "typings": "lib/index.d.ts",
   "files": [
     "lib"
   ],
   "scripts": {
-    "build": "tsc -b",
+    "build": "tsc -b tsconfig.build.json",
     "test": "jest"
   },
   "dependencies": {

@@ -4,7 +4,7 @@ import * as webpack from 'webpack'
 import type { Compiler } from 'webpack'
 import { Plugin } from '../src'
 
-const resolve = (p: string) => path.resolve(__dirname, p)
+const resolve = (p: string): string => path.resolve(__dirname, p)
 
 const compiler = (plugin: Plugin): Compiler => {
 	return webpack({

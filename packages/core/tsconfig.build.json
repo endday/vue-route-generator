@@ -4,13 +4,11 @@
     "rootDir": "./src",
     "outDir": "./lib"
   },
-  "references": [
-    {
-      "path": "../core/tsconfig.json"
-    }
-  ],
   "include": [
-    "./src",
-    "./__tests__"
+    "src"
+  ],
+  "exclude": [
+    "__tests__",
+    "jest.config.ts"
   ]
 }
