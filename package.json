@@ -19,8 +19,8 @@
     "lib"
   ],
   "scripts": {
-    "build": "pnpm -r --filter=@auto-route/webpack-plugin run build",
-    "build1": "pnpm -r --filter=@auto-route/core run build",
+    "build:webpack": "pnpm -r --filter=@auto-route/webpack-plugin run build",
+    "build:core": "pnpm -r --filter=@auto-route/core run build",
     "test": "jest",
     "lint": "eslint packages --fix --ext .ts"
   },
@@ -37,6 +37,9 @@
   },
   "dependencies": {
     "prettier": "2.2.1"
+  },
+  "peerDependencies": {
+    "vue-demi": "^0.13.11"
   },
   "workspaces": [
     "packages/*"

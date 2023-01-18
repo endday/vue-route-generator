@@ -1,16 +1,22 @@
-import type { parseComponent as _parserV2 } from 'vue-template-compiler'
-import type { parse as _parserV3 } from '@vue/compiler-sfc'
+import type {
+  parseComponent as _parserV2,
+  SFCDescriptor as ParseResultV2
+} from 'vue-template-compiler'
+import type {
+  parse as _parserV3,
+  SFCDescriptor as ParseResultV3
+} from '@vue/compiler-sfc'
 
-export interface ParseResult {
-  customBlocks: CustomBlock[]
-}
+// export interface ParseResult {
+//   customBlocks: CustomBlock[]
+// }
+//
+// export interface CustomBlock {
+//   type: string
+//   content: string
+// }
 
-export interface CustomBlock {
-  type: string
-  content: string
-}
-
-export function parseSFC(code: string): ParseResult {
+export function parseSFC(code: string): (ParseResultV2 | ParseResultV3) {
   try {
     const parserV2: typeof _parserV2 = require('vue-template-compiler')
       .parseComponent
