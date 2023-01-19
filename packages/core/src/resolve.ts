@@ -17,7 +17,6 @@ interface FileError extends Error {
   file?: string
 }
 
-const routeMetaName = 'route-meta'
 const routeBlockName = 'route'
 
 export function resolveRoutePaths(
@@ -52,33 +51,20 @@ function pathMapToMeta(
       specifier: pathToSpecifier(path),
       path: pathToRoute(path, parentDepth, nested),
       pathSegments: toActualPath(path),
-      component: importPrefix + path.join('/'),
+      component: importPrefix + path.join('/')
     }
 
     const content = readFile(path.join('/'))
     const parsed = parseSFC(content)
-    const routeMetaBlock = parsed.customBlocks.find(
-      (b) => b.type === routeMetaName
-    )
-    const routeBlock = parsed.customBlocks.find(
-      (b) => b.type === routeBlockName
-    )
+    if (parsed && Array.isArray(parsed.customBlocks)) {
+      parsed.customBlocks.forEach(a => {
+        console.log(a)
+      })
+      const routeBlock = parsed.customBlocks.find(b => b.type === routeBlockName)
 
-    // Deprecated. Will be removed in a later version
-    if (routeMetaBlock) {
-      console.warn(
-        '<route-meta> custom block is deprecated. Use <route> block instead. Found in ' +
-          path.join('/')
-      )
-      meta.routeMeta = tryParseCustomBlock(
-        routeMetaBlock.content,
-        path,
-        'route-meta'
-      )
-    }
-
-    if (routeBlock) {
-      meta.route = tryParseCustomBlock(routeBlock.content, path, 'route')
+      if (routeBlock) {
+        meta.route = tryParseCustomBlock(routeBlock.content, path, 'route')
+      }
     }
 
     if (map.children) {
@@ -96,12 +82,12 @@ function pathMapToMeta(
 
   return map.children
     ? pathMapChildrenToMeta(
-        map.children,
-        importPrefix,
-        nested,
-        readFile,
-        parentDepth
-      )
+      map.children,
+      importPrefix,
+      nested,
+      readFile,
+      parentDepth
+    )
     : []
 }
 
@@ -150,7 +136,7 @@ function tryParseCustomBlock(
     const joinedPath = filePath.join('/')
     const wrapped: FileError = new Error(
       `Invalid json format of <${blockName}> content in ${joinedPath}\n` +
-        err.message
+      err.message
     )
 
     // Store file path to provide useful information to downstream tools

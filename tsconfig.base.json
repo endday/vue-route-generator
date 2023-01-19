@@ -7,11 +7,15 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "resolveJsonModule": true,
-    //    "skipLibCheck": true,
-    //    "declarationMap": true,
-    //    "declaration": true, // 工程引用必须
-    "composite": true
-    // 工程可以被引用和增量编译
-  }
+    "resolveJsonModule": true
+  },
+  "include": [
+    "vite.config.ts",
+    "vite.base.config.ts",
+    "src/**/*.vue",
+    "src/**/*.ts",
+    "packages/**/*.ts",
+    "env.d.ts",
+    "types/*.d.ts"
+  ]
 }

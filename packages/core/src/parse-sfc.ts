@@ -1,38 +1,45 @@
-import type {
-  parseComponent as _parserV2,
-  SFCDescriptor as ParseResultV2
-} from 'vue-template-compiler'
-import type {
-  parse as _parserV3,
-  SFCDescriptor as ParseResultV3
-} from '@vue/compiler-sfc'
+import getVersion from './util/getVersion'
+import type { parseComponent as _parserV2 } from 'vue-template-compiler'
+import type { parse as _parserV3 } from '@vue/compiler-sfc'
 
-// export interface ParseResult {
-//   customBlocks: CustomBlock[]
-// }
-//
-// export interface CustomBlock {
-//   type: string
-//   content: string
-// }
+const packageJson = require('../../package.json')
 
-export function parseSFC(code: string): (ParseResultV2 | ParseResultV3) {
+const { isVue2 } = getVersion()
+
+export interface ParseResult {
+  customBlocks: CustomBlock[]
+}
+
+export interface CustomBlock {
+  type: string
+  content: string
+}
+
+function parserV2Fn(code: string) {
+  const parserV2: typeof _parserV2 = require('vue-template-compiler')
+    .parseComponent
+  return parserV2(code, {
+    pad: 'space'
+  })
+}
+
+function parserV3Fn(code: string) {
+  const parserV3: typeof _parserV3 = require('@vue/compiler-sfc').parse
+  return parserV3(code, {
+    pad: 'space'
+  }).descriptor
+}
+
+export function parseSFC(code: string): ParseResult {
   try {
-    const parserV2: typeof _parserV2 = require('vue-template-compiler')
-      .parseComponent
-    return parserV2(code, {
-      pad: 'space',
-    })
-  } catch {
-    try {
-      const parserV3: typeof _parserV3 = require('@vue/compiler-sfc').parse
-      return parserV3(code, {
-        pad: 'space',
-      }).descriptor
-    } catch {
-      throw new Error(
-        '[vue-route-generator] Either "vue-template-compiler" or "@vue/compiler-sfc" is required.'
-      )
+    if (isVue2) {
+      return parserV2Fn(code)
+    } else {
+      return parserV3Fn(code)
     }
+  } catch {
+    throw new Error(
+      `[${packageJson.name}] Either "vue-template-compiler" or "@vue/compiler-sfc" is required.`
+    )
   }
 }
