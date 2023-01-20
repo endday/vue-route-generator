@@ -1,13 +1,19 @@
 {
   "name": "@auto-route/webpack-plugin",
   "version": "1.0.0",
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "main": "./lib/index.es.js",
+  "typings": "./lib/index.d.ts",
   "files": [
     "lib"
   ],
+  "exports": {
+    ".": {
+      "import": "./lib/index.es.js",
+      "require": "./lib/index.cjs.js"
+    }
+  },
   "scripts": {
-    "build": "tsc -b tsconfig.build.json",
+    "build": "vite build",
     "test": "jest"
   },
   "dependencies": {

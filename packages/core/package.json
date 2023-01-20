@@ -1,14 +1,21 @@
 {
   "name": "@auto-route/core",
   "version": "1.0.0",
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "main": "./lib/index.es.js",
+  "types": "./lib/index.d.ts",
   "files": [
     "lib"
   ],
+  "exports": {
+    ".": {
+      "import": "./lib/index.es.js",
+      "require": "./lib/index.cjs.js"
+    }
+  },
   "scripts": {
-    "build": "tsc -b tsconfig.build.json",
-    "test": "jest"
+    "build": "vite build",
+    "test": "jest",
+    "type": "vue-tsc --declaration --emitDeclarationOnly"
   },
   "devDependencies": {
     "@vue/compiler-sfc": "^3.0.5",
