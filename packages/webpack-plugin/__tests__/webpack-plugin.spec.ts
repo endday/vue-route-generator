@@ -1,3 +1,4 @@
+import { describe, expect } from 'vitest'
 import * as path from 'path'
 import * as fse from 'fs-extra'
 import * as webpack from 'webpack'
@@ -137,12 +138,10 @@ describe('webpack plugin', () => {
 		let count = 0
 		const watching = compiler(plugin).watch({}, () => {
 			count++
-			switch (count) {
-				case 10:
-					fail('webpack watcher seems to go infinite loop')
-				default:
-			}
-		})
+      if (count === 10) {
+        fail('webpack watcher seems to go infinite loop')
+      }
+    })
 
 		setTimeout(() => {
 			watching.close(done)

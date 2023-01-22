@@ -1,4 +1,582 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
+
+exports[`Route resolution > prioritizes index than dynamic route 1`] = `
+[
+  {
+    "chunkName": "users-index",
+    "component": "@/pages/users/index.vue",
+    "name": "users",
+    "path": "/users",
+    "pathSegments": [
+      "users",
+    ],
+    "specifier": "users_index",
+  },
+  {
+    "chunkName": "users-foo",
+    "component": "@/pages/users/foo.vue",
+    "name": "users-foo",
+    "path": "/users/foo",
+    "pathSegments": [
+      "users",
+      "foo",
+    ],
+    "specifier": "users_foo",
+  },
+  {
+    "chunkName": "users-id",
+    "component": "@/pages/users/_id.vue",
+    "name": "users-id",
+    "path": "/users/:id?",
+    "pathSegments": [
+      "users",
+      ":id?",
+    ],
+    "specifier": "users__id",
+  },
+]
+`;
+
+exports[`Route resolution > resolve route custom block 1`] = `
+[
+  {
+    "chunkName": "route",
+    "component": "@/pages/route.vue",
+    "name": "route",
+    "path": "/route",
+    "pathSegments": [
+      "route",
+    ],
+    "route": {
+      "meta": {
+        "title": "Hello",
+      },
+      "name": "Test",
+    },
+    "specifier": "route",
+  },
+]
+`;
+
+exports[`Route resolution > resolve route meta 1`] = `
+[
+  {
+    "chunkName": "meta",
+    "component": "@/pages/meta.vue",
+    "name": "meta",
+    "path": "/meta",
+    "pathSegments": [
+      "meta",
+    ],
+    "specifier": "meta",
+  },
+]
+`;
+
+exports[`Route resolution > resolves as nested routes 1`] = `
+[
+  {
+    "chunkName": "index",
+    "component": "@/pages/index.vue",
+    "name": "index",
+    "path": "",
+    "pathSegments": [],
+    "specifier": "index",
+  },
+  {
+    "chunkName": "foo",
+    "component": "@/pages/foo.vue",
+    "name": "foo",
+    "path": "foo",
+    "pathSegments": [
+      "foo",
+    ],
+    "specifier": "foo",
+  },
+]
+`;
+
+exports[`Route resolution > resolves dynamic nested routes 1`] = `
+[
+  {
+    "children": [
+      {
+        "chunkName": "users-test",
+        "component": "@/pages/users/test.vue",
+        "name": "users-test",
+        "path": "test",
+        "pathSegments": [
+          "users",
+          "test",
+        ],
+        "specifier": "users_test",
+      },
+      {
+        "children": [
+          {
+            "chunkName": "users-id-foo",
+            "component": "@/pages/users/_id/foo.vue",
+            "name": "users-id-foo",
+            "path": "foo",
+            "pathSegments": [
+              "users",
+              ":id",
+              "foo",
+            ],
+            "specifier": "users__id_foo",
+          },
+        ],
+        "chunkName": "users-id",
+        "component": "@/pages/users/_id.vue",
+        "name": "users-id",
+        "path": ":id?",
+        "pathSegments": [
+          "users",
+          ":id?",
+        ],
+        "specifier": "users__id",
+      },
+    ],
+    "chunkName": "users",
+    "component": "@/pages/users.vue",
+    "name": "users",
+    "path": "/users",
+    "pathSegments": [
+      "users",
+    ],
+    "specifier": "users",
+  },
+]
+`;
+
+exports[`Route resolution > resolves dynamic routes 1`] = `
+[
+  {
+    "chunkName": "users-id",
+    "component": "@/pages/users/_id.vue",
+    "name": "users-id",
+    "path": "/users/:id?",
+    "pathSegments": [
+      "users",
+      ":id?",
+    ],
+    "specifier": "users__id",
+  },
+]
+`;
+
+exports[`Route resolution > resolves dynamic routes with multiple "." 1`] = `
+[
+  {
+    "chunkName": "user.register",
+    "component": "@/pages/user.register.vue",
+    "name": "user.register",
+    "path": "/user.register",
+    "pathSegments": [
+      "user.register",
+    ],
+    "specifier": "user_register",
+  },
+]
+`;
+
+exports[`Route resolution > resolves dynamic routes with required param 1`] = `
+[
+  {
+    "chunkName": "users-id-index",
+    "component": "@/pages/users/_id/index.vue",
+    "name": "users-id",
+    "path": "/users/:id",
+    "pathSegments": [
+      "users",
+      ":id",
+    ],
+    "specifier": "users__id_index",
+  },
+]
+`;
+
+exports[`Route resolution > resolves nested route including index 1`] = `
+[
+  {
+    "chunkName": "a-index-b-index-c",
+    "component": "@/pages/a/index/b/index/c.vue",
+    "name": "a-b-c",
+    "path": "/a/b/c",
+    "pathSegments": [
+      "a",
+      "b",
+      "c",
+    ],
+    "specifier": "a_index_b_index_c",
+  },
+]
+`;
+
+exports[`Route resolution > resolves nested route including index with corresponding index.vue 1`] = `
+[
+  {
+    "children": [
+      {
+        "children": [
+          {
+            "chunkName": "a-index-b-index-c",
+            "component": "@/pages/a/index/b/index/c.vue",
+            "name": "a-b-c",
+            "path": "c",
+            "pathSegments": [
+              "a",
+              "b",
+              "c",
+            ],
+            "specifier": "a_index_b_index_c",
+          },
+        ],
+        "chunkName": "a-index-b-index",
+        "component": "@/pages/a/index/b/index.vue",
+        "name": "a-b",
+        "path": "b",
+        "pathSegments": [
+          "a",
+          "b",
+        ],
+        "specifier": "a_index_b_index",
+      },
+    ],
+    "chunkName": "a-index",
+    "component": "@/pages/a/index.vue",
+    "name": "a",
+    "path": "/a",
+    "pathSegments": [
+      "a",
+    ],
+    "specifier": "a_index",
+  },
+]
+`;
+
+exports[`Route resolution > resolves nested routes 1`] = `
+[
+  {
+    "children": [
+      {
+        "chunkName": "foo-index",
+        "component": "@/pages/foo/index.vue",
+        "name": "foo",
+        "path": "",
+        "pathSegments": [
+          "foo",
+        ],
+        "specifier": "foo_index",
+      },
+      {
+        "chunkName": "foo-bar",
+        "component": "@/pages/foo/bar.vue",
+        "name": "foo-bar",
+        "path": "bar",
+        "pathSegments": [
+          "foo",
+          "bar",
+        ],
+        "specifier": "foo_bar",
+      },
+    ],
+    "chunkName": "foo",
+    "component": "@/pages/foo.vue",
+    "name": "foo",
+    "path": "/foo",
+    "pathSegments": [
+      "foo",
+    ],
+    "specifier": "foo",
+  },
+]
+`;
+
+exports[`Route resolution > resolves number prefixed route 1`] = `
+[
+  {
+    "children": [
+      {
+        "chunkName": "1test-2nested",
+        "component": "@/pages/1test/2nested.vue",
+        "name": "1test-2nested",
+        "path": "2nested",
+        "pathSegments": [
+          "1test",
+          "2nested",
+        ],
+        "specifier": "_1test_2nested",
+      },
+    ],
+    "chunkName": "1test",
+    "component": "@/pages/1test.vue",
+    "name": "1test",
+    "path": "/1test",
+    "pathSegments": [
+      "1test",
+    ],
+    "specifier": "_1test",
+  },
+]
+`;
+
+exports[`Route resolution > resolves optional dynamic route under index 1`] = `
+[
+  {
+    "chunkName": "index-param",
+    "component": "@/pages/index/_param.vue",
+    "name": "param",
+    "path": "/:param?",
+    "pathSegments": [
+      ":param?",
+    ],
+    "specifier": "index__param",
+  },
+]
+`;
+
+exports[`Route resolution > resolves routes 1`] = `
+[
+  {
+    "chunkName": "index",
+    "component": "@/pages/index.vue",
+    "name": "index",
+    "path": "/",
+    "pathSegments": [],
+    "specifier": "index",
+  },
+  {
+    "chunkName": "foo",
+    "component": "@/pages/foo.vue",
+    "name": "foo",
+    "path": "/foo",
+    "pathSegments": [
+      "foo",
+    ],
+    "specifier": "foo",
+  },
+  {
+    "chunkName": "baz",
+    "component": "@/pages/baz.vue",
+    "name": "baz",
+    "path": "/baz",
+    "pathSegments": [
+      "baz",
+    ],
+    "specifier": "baz",
+  },
+]
+`;
+
+exports[`Route resolution > resolves spase nested routes 1`] = `
+[
+  {
+    "children": [
+      {
+        "chunkName": "users-session-login",
+        "component": "@/pages/users/session/login.vue",
+        "name": "users-session-login",
+        "path": "session/login",
+        "pathSegments": [
+          "users",
+          "session",
+          "login",
+        ],
+        "specifier": "users_session_login",
+      },
+    ],
+    "chunkName": "users",
+    "component": "@/pages/users.vue",
+    "name": "users",
+    "path": "/users",
+    "pathSegments": [
+      "users",
+    ],
+    "specifier": "users",
+  },
+]
+`;
+
+exports[`Route resolution > sorting > handles when a dynamic route is a directory 1`] = `
+[
+  {
+    "chunkName": "nested-foo",
+    "component": "@/pages/nested/foo.vue",
+    "name": "nested-foo",
+    "path": "/nested/foo",
+    "pathSegments": [
+      "nested",
+      "foo",
+    ],
+    "specifier": "nested_foo",
+  },
+  {
+    "chunkName": "nested-id-foo",
+    "component": "@/pages/nested/_id/foo.vue",
+    "name": "nested-id-foo",
+    "path": "/nested/:id/foo",
+    "pathSegments": [
+      "nested",
+      ":id",
+      "foo",
+    ],
+    "specifier": "nested__id_foo",
+  },
+]
+`;
+
+exports[`Route resolution > sorting > handles when a static route is a directory 1`] = `
+[
+  {
+    "chunkName": "nested-foo-bar",
+    "component": "@/pages/nested/foo/bar.vue",
+    "name": "nested-foo-bar",
+    "path": "/nested/foo/bar",
+    "pathSegments": [
+      "nested",
+      "foo",
+      "bar",
+    ],
+    "specifier": "nested_foo_bar",
+  },
+  {
+    "chunkName": "nested-id",
+    "component": "@/pages/nested/_id.vue",
+    "name": "nested-id",
+    "path": "/nested/:id?",
+    "pathSegments": [
+      "nested",
+      ":id?",
+    ],
+    "specifier": "nested__id",
+  },
+]
+`;
+
+exports[`Route resolution > sorting > handles when both static and dynamic routes are directories 1`] = `
+[
+  {
+    "chunkName": "nested-static-foo",
+    "component": "@/pages/nested/static/foo.vue",
+    "name": "nested-static-foo",
+    "path": "/nested/static/foo",
+    "pathSegments": [
+      "nested",
+      "static",
+      "foo",
+    ],
+    "specifier": "nested_static_foo",
+  },
+  {
+    "chunkName": "nested-id-foo",
+    "component": "@/pages/nested/_id/foo.vue",
+    "name": "nested-id-foo",
+    "path": "/nested/:id/foo",
+    "pathSegments": [
+      "nested",
+      ":id",
+      "foo",
+    ],
+    "specifier": "nested__id_foo",
+  },
+]
+`;
+
+exports[`Route resolution > sorting > prioritizes deeper routes 1`] = `
+[
+  {
+    "chunkName": "nested-test-foo-bar",
+    "component": "@/pages/nested/test/foo/bar.vue",
+    "name": "nested-test-foo-bar",
+    "path": "/nested/test/foo/bar",
+    "pathSegments": [
+      "nested",
+      "test",
+      "foo",
+      "bar",
+    ],
+    "specifier": "nested_test_foo_bar",
+  },
+  {
+    "chunkName": "nested-test-foo-id",
+    "component": "@/pages/nested/test/foo/_id.vue",
+    "name": "nested-test-foo-id",
+    "path": "/nested/test/foo/:id?",
+    "pathSegments": [
+      "nested",
+      "test",
+      "foo",
+      ":id?",
+    ],
+    "specifier": "nested_test_foo__id",
+  },
+  {
+    "chunkName": "nested-id-foo-bar",
+    "component": "@/pages/nested/_id/foo/bar.vue",
+    "name": "nested-id-foo-bar",
+    "path": "/nested/:id/foo/bar",
+    "pathSegments": [
+      "nested",
+      ":id",
+      "foo",
+      "bar",
+    ],
+    "specifier": "nested__id_foo_bar",
+  },
+  {
+    "chunkName": "nested-id-key-bar",
+    "component": "@/pages/nested/_id/_key/bar.vue",
+    "name": "nested-id-key-bar",
+    "path": "/nested/:id/:key/bar",
+    "pathSegments": [
+      "nested",
+      ":id",
+      ":key",
+      "bar",
+    ],
+    "specifier": "nested__id__key_bar",
+  },
+]
+`;
+
+exports[`Route resolution > sorting > prioritizes static routes than dynamic ones 1`] = `
+[
+  {
+    "chunkName": "nested-foo",
+    "component": "@/pages/nested/foo.vue",
+    "name": "nested-foo",
+    "path": "/nested/foo",
+    "pathSegments": [
+      "nested",
+      "foo",
+    ],
+    "specifier": "nested_foo",
+  },
+  {
+    "chunkName": "nested-bar",
+    "component": "@/pages/nested/bar.vue",
+    "name": "nested-bar",
+    "path": "/nested/bar",
+    "pathSegments": [
+      "nested",
+      "bar",
+    ],
+    "specifier": "nested_bar",
+  },
+  {
+    "chunkName": "nested-id",
+    "component": "@/pages/nested/_id.vue",
+    "name": "nested-id",
+    "path": "/nested/:id?",
+    "pathSegments": [
+      "nested",
+      ":id?",
+    ],
+    "specifier": "nested__id",
+  },
+]
+`;
 
 exports[`Route resolution prioritizes index than dynamic route 1`] = `
 Array [

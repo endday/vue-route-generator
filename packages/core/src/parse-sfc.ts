@@ -2,7 +2,7 @@ import getVersion from './util/getVersion'
 import type { parseComponent as _parserV2 } from 'vue-template-compiler'
 import type { parse as _parserV3 } from '@vue/compiler-sfc'
 
-const packageJson = require('../../package.json')
+const packageJson = require('../../../package.json')
 
 const { isVue2 } = getVersion()
 
