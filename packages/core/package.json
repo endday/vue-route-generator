@@ -2,7 +2,7 @@
   "name": "@auto-route/core",
   "version": "1.0.0",
   "main": "./lib/index.es.js",
-  "types": "./lib/index.d.ts",
+  "types": "./types/index.d.ts",
   "files": [
     "lib"
   ],

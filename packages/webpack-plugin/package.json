@@ -2,7 +2,7 @@
   "name": "@auto-route/webpack-plugin",
   "version": "1.0.0",
   "main": "./lib/index.es.js",
-  "typings": "./lib/index.d.ts",
+  "types": "./types/index.d.ts",
   "files": [
     "lib"
   ],

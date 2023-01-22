@@ -1,6 +1,23 @@
 {
-  "extends": "./tsconfig.base.json",
+  //  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "commonjs",
+    //    "moduleResolution": "node",
+    "declaration": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "resolveJsonModule": true
+  },
   "include": [
+    "packages/*/vite.config.ts",
+    "vite.base.config.ts",
+    "src/**/*.vue",
+    "src/**/*.ts",
+    "packages/**/*.ts",
+    "env.d.ts",
+    "types/*.d.ts",
     "packages/*/__tests__/**/**.ts"
   ]
 }
