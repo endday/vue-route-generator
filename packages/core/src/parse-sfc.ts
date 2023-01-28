@@ -15,7 +15,7 @@ export interface CustomBlock {
   content: string
 }
 
-function parserV2Fn(code: string) {
+function parserV2Fn (code: string) {
   const parserV2: typeof _parserV2 = require('vue-template-compiler')
     .parseComponent
   return parserV2(code, {
@@ -23,14 +23,14 @@ function parserV2Fn(code: string) {
   })
 }
 
-function parserV3Fn(code: string) {
+function parserV3Fn (code: string) {
   const parserV3: typeof _parserV3 = require('@vue/compiler-sfc').parse
   return parserV3(code, {
     pad: 'space'
   }).descriptor
 }
 
-export function parseSFC(code: string): ParseResult {
+export function parseSFC (code: string): ParseResult {
   try {
     if (isVue2) {
       return parserV2Fn(code)

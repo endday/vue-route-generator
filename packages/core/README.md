@@ -2,11 +2,14 @@
 
 [Vue Router](https://github.com/vuejs/vue-router) route config generator.
 
-You may want to use [vue-auto-routing](https://github.com/ktsn/vue-auto-routing) for auto generating routing or [vue-cli-plugin-auto-routing](https://github.com/ktsn/vue-cli-plugin-auto-routing) which includes all useful features on routing.
+You may want to use [vue-auto-routing](https://github.com/ktsn/vue-auto-routing) for auto generating routing
+or [vue-cli-plugin-auto-routing](https://github.com/ktsn/vue-cli-plugin-auto-routing) which includes all useful features
+on routing.
 
 ## Overview
 
-This tool generates a JavaScript code that exporting Vue Router's `routes` config by reading your Vue components directory.
+This tool generates a JavaScript code that exporting Vue Router's `routes` config by reading your Vue components
+directory.
 
 For example, when you have following file structure:
 
@@ -84,11 +87,13 @@ export default new Router({
 
 ## Routing
 
-The routing is inspired by [Nuxt routing](https://nuxtjs.org/guide/routing) and is implemented with the same functionality.
+The routing is inspired by [Nuxt routing](https://nuxtjs.org/guide/routing) and is implemented with the same
+functionality.
 
 ### Partials
 
-Directories and files started and ended with `__` (two underscores, e.g. `__foo__.vue`) will be ignored. You can use them as partial components which will be used in some page components.
+Directories and files started and ended with `__` (two underscores, e.g. `__foo__.vue`) will be ignored. You can use
+them as partial components which will be used in some page components.
 
 ## Route Custom Block
 
@@ -130,7 +135,10 @@ module.exports = [
 
 ## Syntax Highlighting
 
-To enable syntax highlighting in VS Code using [Vetur's Custom Code Blocks](https://vuejs.github.io/vetur/highlighting.html#custom-block) add the following snippet to your preferences...
+To enable syntax highlighting in VS Code
+using [Vetur's Custom Code Blocks](https://vuejs.github.io/vetur/highlighting.html#custom-block) add the following
+snippet to your preferences...
+
 ```
  "vetur.grammar.customBlocks": {
     "route": "json"
@@ -147,11 +155,13 @@ To enable syntax highlighting in VS Code using [Vetur's Custom Code Blocks](http
 - `importPrefix`: A string that will be added to importing component path (default `@/pages/`).
 - `dynamicImport`: Use dynamic import expression (`import()`) to import component (default `true`).
 - `chunkNamePrefix`: Prefix for each route chunk name (only available when `dynamicImport: true`).
-- `nested`: If `true`, generated route path will be always treated as nested. (e.g. will generate `path: 'foo'` rather than `path: '/foo'`)
+- `nested`: If `true`, generated route path will be always treated as nested. (e.g. will generate `path: 'foo'` rather
+  than `path: '/foo'`)
 
 ## Related Projects
 
-- [vue-cli-plugin-auto-routing](https://github.com/ktsn/vue-cli-plugin-auto-routing): Vue CLI plugin including auto pages and layouts resolution.
+- [vue-cli-plugin-auto-routing](https://github.com/ktsn/vue-cli-plugin-auto-routing): Vue CLI plugin including auto
+  pages and layouts resolution.
 - [vue-router-layout](https://github.com/ktsn/vue-router-layout): Lightweight layout resolver for Vue Router.
 - [vue-auto-routing](https://github.com/ktsn/vue-auto-routing): Generate Vue Router routing automatically.
 

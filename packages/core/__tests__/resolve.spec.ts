@@ -1,7 +1,7 @@
-import { describe, expect, vi } from 'vitest'
+import { describe, expect, vi, it } from 'vitest'
 import { resolveRoutePaths } from '../src/resolve'
 
-function mockReadFile(path: string): string {
+function mockReadFile (path: string): string {
   if (path === 'route.vue') {
     return `<route>
     {
@@ -30,7 +30,7 @@ describe('Route resolution', () => {
     expectWarn?: string
   }
 
-  function test(
+  function test (
     name: string,
     paths: string[],
     options: TestOptions = {}

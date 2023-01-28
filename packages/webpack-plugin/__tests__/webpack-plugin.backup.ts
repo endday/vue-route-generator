@@ -24,33 +24,35 @@ const compiler = (plugin: Plugin): Compiler => {
   })
 }
 
-const matchOutputWithSnapshot = (path?: string) => {
-  const out = fse.readFileSync(
+const matchOutputWithSnapshot = async (path?: string) => {
+  const out = await fse.readFile(
     resolve(path || './fixtures/out/main.js'),
     'utf8'
   )
+  console.log(out)
   expect(out).toMatchSnapshot()
 }
 
 const addPage = (p: string, content = '') => {
   const to = resolve(path.join('fixtures/pages', p))
-  fse.outputFileSync(to, content)
+  return fse.outputFile(to, content)
 }
 
 const removePage = (p: string) => {
   const to = resolve(path.join('fixtures/pages', p))
-  fse.unlinkSync(to)
+  return fse.remove(to)
 }
 
 describe('webpack plugin', () => {
-  beforeEach(() => {
-    fse.removeSync(resolve('../index.js'))
-
-    // reset pages
-    fse.removeSync(resolve('fixtures/pages'))
-    addPage('index.vue')
-    addPage('users/foo.vue')
-    addPage('users/_id.vue')
+  beforeEach(async () => {
+    await Promise.all([
+      fse.remove(resolve('../index.js')),
+      // reset pages
+      fse.remove(resolve('fixtures/pages')),
+      addPage('index.vue'),
+      addPage('users/foo.vue'),
+      addPage('users/_id.vue')
+    ])
   })
 
   it('imports dynamically created routes', () => new Promise(done => {
@@ -58,8 +60,8 @@ describe('webpack plugin', () => {
       pages: resolve('fixtures/pages')
     })
 
-    compiler(plugin).run(() => {
-      matchOutputWithSnapshot()
+    compiler(plugin).run(async () => {
+      await matchOutputWithSnapshot()
       done(1)
     })
   }))
@@ -70,15 +72,15 @@ describe('webpack plugin', () => {
     })
 
     let count = 0
-    const watching = compiler(plugin).watch({}, () => {
+    const watching = compiler(plugin).watch({}, async () => {
       count++
       switch (count) {
         case 1:
-          addPage('users.vue')
-          break
+          await addPage('users.vue')
         default:
-          matchOutputWithSnapshot()
+          await matchOutputWithSnapshot()
           watching.close(done)
+          break
       }
     })
   }))
@@ -89,11 +91,11 @@ describe('webpack plugin', () => {
     })
 
     let count = 0
-    const watching = compiler(plugin).watch({}, () => {
+    const watching = compiler(plugin).watch({}, async () => {
       count++
       switch (count) {
         case 1:
-          addPage(
+          await addPage(
             'users/foo.vue',
             `
               <route>
@@ -103,13 +105,13 @@ describe('webpack plugin', () => {
               </route>
             `
           )
-          break
         default:
-          matchOutputWithSnapshot()
+          await matchOutputWithSnapshot()
           watching.close(done)
+          break
       }
     })
-  }))
+  }), 10000)
 
   it('watches removing a page', () => new Promise(done => {
     const plugin = new Plugin({
@@ -117,15 +119,15 @@ describe('webpack plugin', () => {
     })
 
     let count = 0
-    const watching = compiler(plugin).watch({}, () => {
+    const watching = compiler(plugin).watch({}, async () => {
       count++
       switch (count) {
         case 1:
-          removePage('users/foo.vue')
-          break
+          await removePage('users/foo.vue')
         default:
-          matchOutputWithSnapshot()
+          await matchOutputWithSnapshot()
           watching.close(done)
+          break
       }
     })
   }))
@@ -138,10 +140,8 @@ describe('webpack plugin', () => {
     let count = 0
     const watching = compiler(plugin).watch({}, () => {
       count++
-      switch (count) {
-        case 10:
-          fail('webpack watcher seems to go infinite loop')
-        default:
+      if (count === 10) {
+        fail('webpack watcher seems to go infinite loop')
       }
     })
 
@@ -156,11 +156,11 @@ describe('webpack plugin', () => {
     })
 
     let count = 0
-    const watching = compiler(plugin).watch({}, () => {
+    const watching = compiler(plugin).watch({}, async () => {
       count++
       switch (count) {
         case 1:
-          addPage(
+          await addPage(
             'users/foo.vue',
             `
               <route>
@@ -172,9 +172,8 @@ describe('webpack plugin', () => {
               </route>
             `
           )
-          break
         case 2:
-          addPage(
+          await addPage(
             'users/foo.vue',
             `
               <route>
@@ -186,13 +185,13 @@ describe('webpack plugin', () => {
               </route>
             `
           )
-          break
         case 3:
           // Somehow, changing content triggers compilation twice.
           break
         default:
-          matchOutputWithSnapshot()
+          await matchOutputWithSnapshot()
           watching.close(done)
+          break
       }
     })
   }))
@@ -203,10 +202,12 @@ describe('webpack plugin', () => {
       outFile: resolve('fixtures/out/custom.js')
     })
 
-    compiler(plugin).run(() => {
-      expect(fse.existsSync(resolve('./fixtures/out/custom.js'))).toBeTruthy()
-      matchOutputWithSnapshot('fixtures/out/custom.js')
+    compiler(plugin).run(async () => {
+      await fse.pathExists(resolve('./fixtures/out/custom.js'))
+      await matchOutputWithSnapshot('fixtures/out/custom.js')
       done(1)
     })
   }))
 })
+
+

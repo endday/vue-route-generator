@@ -1,6 +1,6 @@
-const packageJson = require('../../package.json')
+import * as packageJson from '../../package.json'
 
-export default function main() {
+export default function main () {
   let vue = null
   const data = {
     isVue2: false,

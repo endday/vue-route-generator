@@ -5,4 +5,4 @@ export interface GenerateConfig {
     chunkNamePrefix?: string;
     nested?: boolean;
 }
-export declare function generateRoutes({ pages, importPrefix, dynamicImport, chunkNamePrefix, nested, }: GenerateConfig): string;
+export declare function generateRoutes({ pages, importPrefix, dynamicImport, chunkNamePrefix, nested }: GenerateConfig): string;

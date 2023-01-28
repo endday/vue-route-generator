@@ -14,15 +14,16 @@
   },
   "scripts": {
     "build": "vite build",
-    "test": "vitest"
+    "test": "vitest",
+    "prebuild": "npm run test"
   },
   "dependencies": {
-    "@auto-route/core": "workspace:*",
-    "chokidar": "^3.5.3"
+    "@auto-route/core": "workspace:*"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.6",
     "fs-extra": "^10.1.0",
-    "webpack": "^5.74.0"
+    "webpack": "^5.74.0",
+    "chokidar": "^3.5.3"
   }
 }

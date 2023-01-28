@@ -5,5 +5,8 @@ module.exports = {
   env: {                          //指定代码的运行环境
     browser: true,
     node: true
+  },
+  rules: {
+    'object-curly-spacing': ['error', 'always']
   }
 }

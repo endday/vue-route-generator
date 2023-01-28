@@ -1,15 +1,15 @@
 import * as prettier from 'prettier'
 import { PageMeta } from '../resolve'
 
-function isAllowedRouteOption(key: string): boolean {
+function isAllowedRouteOption (key: string): boolean {
   return !['name', 'meta', 'path', 'component'].includes(key)
 }
 
-function createChildrenRoute(children: PageMeta[]): string {
+function createChildrenRoute (children: PageMeta[]): string {
   return `,children: [${children.map(createRoute).join(',')}]`
 }
 
-function createRoute(meta: PageMeta): string {
+function createRoute (meta: PageMeta): string {
   const children = !meta.children ? '' : createChildrenRoute(meta.children)
   const route = meta.route ?? {}
 
@@ -22,8 +22,8 @@ function createRoute(meta: PageMeta): string {
   const routeMeta = meta.routeMeta
     ? ',meta: ' + JSON.stringify(meta.routeMeta, null, 2)
     : meta.route?.meta
-    ? ',meta: ' + JSON.stringify(route.meta, null, 2)
-    : ''
+      ? ',meta: ' + JSON.stringify(route.meta, null, 2)
+      : ''
 
   const otherOptions = Object.keys(route)
     .filter(isAllowedRouteOption)
@@ -38,7 +38,7 @@ function createRoute(meta: PageMeta): string {
   }`
 }
 
-function createImport(
+function createImport (
   meta: PageMeta,
   dynamic: boolean,
   chunkNamePrefix: string
@@ -49,16 +49,16 @@ function createImport(
 
   return meta.children
     ? [code]
-        .concat(
-          meta.children.map((child) =>
-            createImport(child, dynamic, chunkNamePrefix)
-          )
+      .concat(
+        meta.children.map((child) =>
+          createImport(child, dynamic, chunkNamePrefix)
         )
-        .join('\n')
+      )
+      .join('\n')
     : code
 }
 
-export function createRoutes(
+export function createRoutes (
   meta: PageMeta[],
   dynamic: boolean,
   chunkNamePrefix: string
@@ -70,6 +70,6 @@ export function createRoutes(
   return prettier.format(`${imports}\n\nexport default [${code}]`, {
     parser: 'babel',
     semi: false,
-    singleQuote: true,
+    singleQuote: true
   })
 }

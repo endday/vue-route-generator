@@ -14,15 +14,14 @@
   },
   "scripts": {
     "build": "vite build",
-    "test": "vitest",
-    "type": "vue-tsc --declaration --emitDeclarationOnly"
+    "test": "vitest"
   },
   "devDependencies": {
     "@vue/compiler-sfc": "^3.0.5",
     "vue": "^3.0.5",
-    "vue-template-compiler": "^2.6.12"
-  },
-  "dependencies": {
-    "fast-glob": "^3.2.4"
+    "vue-template-compiler": "^2.6.12",
+    "fast-glob": "^3.2.4",
+    "prettier": "2.2.1",
+    "@types/prettier": "2.2.1"
   }
 }

@@ -19,7 +19,7 @@ interface FileError extends Error {
 
 const routeBlockName = 'route'
 
-export function resolveRoutePaths(
+export function resolveRoutePaths (
   paths: string[],
   importPrefix: string,
   nested: boolean,
@@ -27,15 +27,15 @@ export function resolveRoutePaths(
 ): PageMeta[] {
   const map: NestedMap<string[]> = {}
 
-  const splitted = paths.map((p) => p.split('/'))
-  splitted.forEach((path) => {
+  const splitter = paths.map((p) => p.split('/'))
+  splitter.forEach((path) => {
     setToMap(map, pathToMapPath(path), path)
   })
 
   return pathMapToMeta(map, importPrefix, nested, readFile)
 }
 
-function pathMapToMeta(
+function pathMapToMeta (
   map: NestedMap<string[]>,
   importPrefix: string,
   nested: boolean,
@@ -91,7 +91,7 @@ function pathMapToMeta(
     : []
 }
 
-function routePathComparator(a: string[], b: string[]): number {
+function routePathComparator (a: string[], b: string[]): number {
   const a0 = a[0]
   const b0 = b[0]
 
@@ -106,7 +106,7 @@ function routePathComparator(a: string[], b: string[]): number {
   return order !== 0 ? order : routePathComparator(a.slice(1), b.slice(1))
 }
 
-function pathMapChildrenToMeta(
+function pathMapChildrenToMeta (
   children: Map<string, NestedMap<string[]>>,
   importPrefix: string,
   nested: boolean,
@@ -125,7 +125,7 @@ function pathMapChildrenToMeta(
     })
 }
 
-function tryParseCustomBlock(
+function tryParseCustomBlock (
   content: string,
   filePath: string[],
   blockName: string
@@ -147,11 +147,11 @@ function tryParseCustomBlock(
   }
 }
 
-function isDynamicRoute(segment: string): boolean {
+function isDynamicRoute (segment: string): boolean {
   return segment[0] === ':'
 }
 
-function isOmittable(segment: string): boolean {
+function isOmittable (segment: string): boolean {
   return segment === 'index'
 }
 
@@ -160,7 +160,7 @@ function isOmittable(segment: string): boolean {
  * - Omit if the last segument is `index`
  * - Convert dynamic route to `:param` format
  */
-function toActualPath(segments: string[]): string[] {
+function toActualPath (segments: string[]): string[] {
   const lastIndex = segments.length - 1
   const last = basename(segments[lastIndex])
   segments = segments.slice(0, -1).concat(last)
@@ -177,12 +177,12 @@ function toActualPath(segments: string[]): string[] {
     .filter((s) => !isOmittable(s))
 }
 
-function pathToMapPath(segments: string[]): string[] {
+function pathToMapPath (segments: string[]): string[] {
   const last = segments[segments.length - 1]
   return segments.slice(0, -1).concat(basename(last))
 }
 
-function pathToName(segments: string[]): string {
+function pathToName (segments: string[]): string {
   const last = segments[segments.length - 1]
   segments = segments
     .slice(0, -1)
@@ -200,7 +200,7 @@ function pathToName(segments: string[]): string {
     .join('-')
 }
 
-function pathToChunkName(segments: string[]): string {
+function pathToChunkName (segments: string[]): string {
   const last = segments[segments.length - 1]
   segments = segments.slice(0, -1).concat(basename(last))
 
@@ -211,7 +211,7 @@ function pathToChunkName(segments: string[]): string {
     .join('-')
 }
 
-function pathToSpecifier(segments: string[]): string {
+function pathToSpecifier (segments: string[]): string {
   const last = segments[segments.length - 1]
   const replaced = segments
     .slice(0, -1)
@@ -222,7 +222,7 @@ function pathToSpecifier(segments: string[]): string {
   return /^\d/.test(replaced) ? '_' + replaced : replaced
 }
 
-function pathToRoute(
+function pathToRoute (
   segments: string[],
   parentDepth: number,
   nested: boolean
@@ -231,6 +231,6 @@ function pathToRoute(
   return prefix + toActualPath(segments).slice(parentDepth).join('/')
 }
 
-function basename(filename: string): string {
+function basename (filename: string): string {
   return filename.replace(/\.[^.]+$/g, '')
 }
