@@ -3,11 +3,15 @@ import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import { resolve } from 'path'
 import { getExternals } from './scripts/util'
+import { builtinModules } from 'module'
 
 const outputName = 'index'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  ssr: {
+    external: builtinModules
+  },
   build: {
     outDir: 'lib',
     emptyOutDir: true,
@@ -19,11 +23,13 @@ export default defineConfig({
       fileName: (format) => `${outputName}.${format}.js`
     },
     rollupOptions: {
-      external: getExternals()
+      external: [...getExternals(), ...builtinModules]
     }
   },
-  define: {
-    'import.meta.vitest': 'undefined'
+  resolve: {
+    alias: {
+      '@auto-route/core': resolve(__dirname, './packages/core/src/index.ts'),
+    }
   },
   plugins: [
     dts({
@@ -43,6 +49,9 @@ export default defineConfig({
     environment: 'jsdom',
     watch: false,
     include: ['**/__tests__/**/*.spec.ts'],
-    testTimeout: 10000
+    testTimeout: 10000,
+    deps: {
+      external: ['**/node_modules/**', '**/dist/**', ...getExternals()]
+    }
   }
 })

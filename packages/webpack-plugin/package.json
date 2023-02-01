@@ -8,13 +8,14 @@
   ],
   "exports": {
     ".": {
-      "import": "./lib/index.es.js",
-      "require": "./lib/index.cjs.js"
+      "require": "./lib/index.cjs.js",
+      "import": "./lib/index.es.js"
     }
   },
   "scripts": {
     "build": "vite build",
     "test": "vitest",
+    "test-update": "vitest -u",
     "prebuild": "npm run test"
   },
   "dependencies": {
@@ -22,8 +23,8 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.6",
-    "fs-extra": "^10.1.0",
-    "webpack": "^5.74.0",
+    "fs-extra": "^9.0.1",
+    "webpack": "^5.11.1",
     "chokidar": "^3.5.3"
   }
 }

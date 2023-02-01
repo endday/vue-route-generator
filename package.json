@@ -20,6 +20,7 @@
     "build": "pnpm run build-core && pnpm run build-webpack",
     "build-webpack": "pnpm -r --filter webpack-plugin run build",
     "build-core": "pnpm -r --filter core run build",
+    "test-webpack": "pnpm -r --filter webpack-plugin run test-update",
     "test": "vitest",
     "lint": "eslint packages --fix --ext .ts"
   },

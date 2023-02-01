@@ -12,13 +12,14 @@ export interface GenerateConfig {
   nested?: boolean
 }
 
-export function generateRoutes ({
-                                  pages,
-                                  importPrefix = '@/pages/',
-                                  dynamicImport = true,
-                                  chunkNamePrefix = '',
-                                  nested = false
-                                }: GenerateConfig): string {
+export function generateRoutes(
+  {
+    pages,
+    importPrefix = '@/pages/',
+    dynamicImport = true,
+    chunkNamePrefix = '',
+    nested = false
+  }: GenerateConfig): string {
   const patterns = ['**/*.vue', '!**/__*__.vue', '!**/__*__/**']
 
   const pagePaths = fg.sync(patterns, {

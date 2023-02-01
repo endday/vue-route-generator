@@ -2,4 +2,7 @@
 node_modules/
 lib/
 dist/
+/packages/webpack-plugin/__tests__/fixtures/pages/
+/packages/webpack-plugin/__tests__/fixtures/out/
+/packages/webpack-plugin/__tests__/fixtures/router.js
 *.tsbuildinfo
