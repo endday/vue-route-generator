@@ -1,5 +1,5 @@
 {
-  "name": "@auto-route/core",
+  "name": "@vue-auto-router/core",
   "version": "1.0.0",
   "main": "./lib/index.es.js",
   "types": "./types/index.d.ts",

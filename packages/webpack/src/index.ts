@@ -3,7 +3,7 @@ import { resolve } from 'path'
 import * as chokidar from 'chokidar'
 import type { FSWatcher } from 'chokidar'
 import type { Compiler } from 'webpack'
-import { generateRoutes, GenerateConfig } from '@auto-route/core'
+import { generateRoutes, GenerateConfig } from '@vue-auto-router/core'
 
 const pluginName = 'AutoRoutingPlugin'
 

@@ -1,5 +1,5 @@
 {
-  "name": "auto-route",
+  "name": "vue-auto-router",
   "version": "1.0.0",
   "packageManager": "pnpm@7.1.0",
   "engines": {
@@ -17,10 +17,11 @@
     "lib"
   ],
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "build": "pnpm run build-core && pnpm run build-webpack",
-    "build-webpack": "pnpm -r --filter webpack-plugin run build",
+    "build-webpack": "pnpm -r --filter webpack run build",
     "build-core": "pnpm -r --filter core run build",
-    "test-webpack": "pnpm -r --filter webpack-plugin run test-update",
+    "test-webpack": "pnpm -r --filter webpack run test-update",
     "test": "vitest",
     "lint": "eslint packages --fix --ext .ts"
   },

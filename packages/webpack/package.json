@@ -1,5 +1,5 @@
 {
-  "name": "@auto-route/webpack-plugin",
+  "name": "@vue-auto-router/webpack",
   "version": "1.0.0",
   "main": "./lib/index.es.js",
   "types": "./types/index.d.ts",
@@ -19,7 +19,7 @@
     "prebuild": "npm run test"
   },
   "dependencies": {
-    "@auto-route/core": "workspace:*"
+    "@vue-auto-router/core": "workspace:*"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.6",

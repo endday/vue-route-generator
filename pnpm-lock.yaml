@@ -42,15 +42,15 @@ importers:
       vue: 3.2.37
       vue-template-compiler: 2.7.9
 
-  packages/webpack-plugin:
+  packages/webpack:
     specifiers:
-      '@auto-route/core': workspace:*
       '@types/fs-extra': ^9.0.6
+      '@vue-auto-router/core': workspace:*
       chokidar: ^3.5.3
       fs-extra: ^9.0.1
       webpack: ^5.11.1
     dependencies:
-      '@auto-route/core': link:../core
+      '@vue-auto-router/core': link:../core
     devDependencies:
       '@types/fs-extra': 9.0.13
       chokidar: 3.5.3
